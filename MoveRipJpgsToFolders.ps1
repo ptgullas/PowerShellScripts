@@ -1,3 +1,4 @@
+# param should be a filename with the format "rip20200827202300_005_4bae061085183114.jpg"
 function Get-BatchName($jpgName) {
     $jpgSplit = $jpgName.Split('_')
     $batchName = $jpgSplit[0].Substring(3)
