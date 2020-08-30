@@ -1,0 +1,21 @@
+function Get-BatchName($jpgName) {
+    $jpgSplit = $jpgName.Split('_')
+    $batchName = $jpgSplit[0].Substring(3)
+    return $batchName
+}
+
+function CreateFolderIfDoesNotExist($batchName) {
+    $pathToCreate = Join-Path -Path . -ChildPath $batchName
+    If(!(Test-Path $pathToCreate)) {
+        $newBatchFolder = New-Item -Path . -Name $batchname -ItemType "directory"
+    }
+    return $pathToCreate
+}
+
+# My very first PowerShell script
+$jpgsInFolder = Get-Childitem $Path -filter "*.jpg"
+foreach ($jpg in $jpgsInFolder) {
+    $batchname = Get-BatchName $jpg.Name
+    $newFolder = CreateFolderIfDoesNotExist($batchname)
+    Move-Item -Path $jpg -Destination $newFolder
+}
