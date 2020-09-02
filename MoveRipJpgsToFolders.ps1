@@ -9,6 +9,7 @@ function CreateFolderIfDoesNotExist($batchName) {
     $pathToCreate = Join-Path -Path . -ChildPath $batchName
     If(!(Test-Path $pathToCreate)) {
         $newBatchFolder = New-Item -Path . -Name $batchname -ItemType "directory"
+        Write-Host "Created $pathToCreate" -ForegroundColor White -BackgroundColor DarkMagenta
     }
     return $pathToCreate
 }
